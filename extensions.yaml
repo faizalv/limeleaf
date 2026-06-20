@@ -1,0 +1,6 @@
+postgres_version: "16.4"
+extensions:
+  - name: pgvector
+    repo: https://github.com/pgvector/pgvector
+    version: "v0.7.0"
+    build: make PG_CONFIG=$PG_CONFIG -j$JOBS && make PG_CONFIG=$PG_CONFIG install
