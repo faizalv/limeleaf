@@ -49,7 +49,12 @@ if [[ "$OS" == "linux" ]]; then
     CONFIGURE_FLAGS+=(--without-zlib)
 fi
 
-./configure "${CONFIGURE_FLAGS[@]}"
+EXTRA_CFLAGS=""
+if [[ "$OS" == "darwin" ]]; then
+    EXTRA_CFLAGS="-Wno-error=unguarded-availability-new"
+fi
+
+CFLAGS="${EXTRA_CFLAGS}" ./configure "${CONFIGURE_FLAGS[@]}"
 
 echo "==> Building PostgreSQL"
 make -j"${JOBS}"
